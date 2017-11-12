@@ -6,4 +6,5 @@
 
 (alias
  ((name runtest)
+  (package math)
   (action (run ./test.exe))))

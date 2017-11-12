@@ -1,0 +1,13 @@
+opam-version: "1.2"
+maintainer: "jeremie@dimino.org"
+authors: ["Jérémie Dimino <jeremie@dimino.org>"]
+license: "BSD3"
+homepage: "https://github.com/diml/jbuilder-tutorial1"
+bug-reports: "https://github.com/diml/jbuilder-tutorial1/issues"
+dev-repo: "https://github.com/diml/jbuilder-tutorial1.git"
+depends: [
+  "math"
+  "cmdliner"
+]
+build:      [["jbuilder" "build"   "-p" name "-j" jobs]]
+build-test: [["jbuilder" "runtest" "-p" name "-j" jobs]]

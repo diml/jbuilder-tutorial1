@@ -2,4 +2,5 @@
 
 (library
  ((name        math)
+  (public_name math)
   (synopsis    "Math utilities")))

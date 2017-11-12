@@ -1,5 +1,24 @@
 (jbuild_version 1)
 
 (executable
- ((name      cli)
-  (libraries (math cmdliner))))
+ ((name        cli)
+  (public_name math)
+  (package     math-bin)
+  (libraries   (math cmdliner))))
+
+(rule
+ (with-stdout-to math.1
+  (run math --help=groff)))
+
+(rule
+ (with-stdout-to math-fact.1
+  (run math fact --help=groff)))
+
+(rule
+ (with-stdout-to math-gcd.1
+  (run math gcd --help=groff)))
+
+(install
+ ((section man)
+  (package math-bin)
+  (files (math.1 math-fact.1 math-gcd.1))))
