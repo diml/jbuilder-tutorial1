@@ -1,0 +1,9 @@
+(jbuild_version 1)
+
+(executable
+ ((name test)
+  (libraries (math))))
+
+(alias
+ ((name runtest)
+  (action (run ./test.exe))))
