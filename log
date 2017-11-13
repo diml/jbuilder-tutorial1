@@ -125,6 +125,7 @@ git checkout test/test.ml
 \n
 emacs math.opam
 \n
+##fast
 opam-version: \"1.2\"
 \n
 maintainer: \"jeremie@dimino.org\"
@@ -139,24 +140,10 @@ bug-reports: \"https://github.com/diml/jbuilder-tutorial1/issues\"
 \n
 dev-repo: \"https://github.com/diml/jbuilder-tutorial1.git\"
 \n
+##slow
 \024\003y
-\027[A\027[D\027[D\027[D\027[D\027[D-bin
+cp math.opam math-bin.opam
 \n
-opam-version: \"1.2\"
-\n
-maintainer: \"jeremie@dimino.org\"
-\n
-authors: [\"J\195\169r\195\169mie Dimino <jeremie@dimino.org>\"]
-\n
-license: \"BSD3\"
-\n
-homepage: \"https://github.com/diml/jbuilder-tutorial1\"
-\n
-bug-reports: \"https://github.com/diml/jbuilder-tutorial1/issues\"
-\n
-dev-repo: \"https://github.com/diml/jbuilder-tutorial1.git\"
-\n
-\024\003y
 emacs sr\tjb\t
 \n
 \027OB\027OB\027OB\027OB\027OB\027OB\027OA\027OA\005
@@ -168,33 +155,15 @@ emacs bin/jbuild
 \027OB\027OB\027OB\005
 \n
 \t(public_name math)
+\n\t(pack\tage math-bin)\001\027OB\027OB\027OB
 \n
-\t(pack\tage math-bin)\001\027OB\027OB\027OB
+xxxxxxxxxxxxxxxxxxx
 \n
-(rule
-\n
-\t((targets (math.1))
-\n
-\t(deps (cli.exe))
-\n
-(act\tion (with-stdout-to ${@}\n\t(run ./${<} --help=groff)))))
-\n
-
-\n
-(rule
-\n
-\t(with-stdout-to math-fact.1
-\n
-\t(run ./cli.exe fact --help=groff)))
-\n\n
-(rule\n\t(with-stdout-to math-gcd.1\n\t(run ./cli.exe gcd --help=groff)))\n\n
-(install
-\n
-\t((section man)
-\n
-\t(package math-bin)
-\n
-\t(files (math.1 math-fact.1 math-gcd.1))))
+(rule\n\t(with-stdout-to math-fact.1\n\t(run ./cli.exe fact --help=groff)))\n\n
+(install\n
+\t((section man)\n
+\t(package math-bin)\n
+\t(files (math.1))))
 \n
 \024\003y
 emacs te\tjbuild
