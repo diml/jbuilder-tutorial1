@@ -35,7 +35,7 @@ cat math.mli\n
 rm -f mat\t*\n
 ls\n
 \n
-\027[A\027[A\027[A
+jbuilder utop
 \n
 Math.Fa\t.fa\t 5;;
 \n
