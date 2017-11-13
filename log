@@ -154,11 +154,13 @@ emacs math.opam
 \n
 \027OB\027OB\027OB\027OB\027OB\027OB\027OB\027OB\027OBbuild: [[\"jbuilder\" \"build\" \"-p\" name \"-j\" jobs]]
 \n
-\001\011\000\027OA\027w\027OB\025\027OA\027OC\027OC\027OC\027OC\027OC-test\027OC\027OC\027OC\027OC\027OC\027OC\027OC\027OC\027OC\027OC\027OC\027OC\027OC\027OC\027OC\027OC\027OC\027OC\027OC\027OC\027OC\127\127\127\127\127runtest\001\024\003y\027[A\027[D\027[D\027[D\027[D\027[D-bin
+\001\011\000\027OA\027w\027OB\025\027OA\027OC\027OC\027OC\027OC\027OC-test\027OC\027OC\027OC\027OC\027OC\027OC\027OC\027OC\027OC\027OC\027OC\027OC\027OC\027OC\027OC\027OC\027OC\027OC\027OC\027OC\027OC\127\127\127\127\127runtest
+\001\024\003y
+\027[A\027[D\027[D\027[D\027[D\027[D-bin
 \n
 \027OB\027OB\027OB\027OB\027OB\027OB\027OB\027OB\027[200~build: [[\"jbuilder\" \"build\" \"-p\" name \"-j\" jobs]]
 \n
-build-test: [[\"jbuilder\" \"runtest\" \"-p\" name \"-j\" jobs]]\027[201~
+build-test: [[\"jbuilder\" \"runtest\" \"-p\" name \"-j\" jobs]]
 \n
 \001\011depends: [
 \n
@@ -168,7 +170,8 @@ build-test: [[\"jbuilder\" \"runtest\" \"-p\" name \"-j\" jobs]]\027[201~
 \n
 ]\t
 \n
-\001\011\024\003ymkdir pkg
+\001\011\024\003y
+mkdir pkg
 \n
 emacs pkg/pkg.ml
 \n
@@ -176,26 +179,5 @@ emacs pkg/pkg.ml
 \n
 #require \"topkg-jbuilder.auto\"
 \n
-\024\003ytopkg log edit
-\n
-1.\127\1270.1 \127
-\n
----
-\n
-
-\n
-- Initial import
-\n
-git add CH\t
-\n
-\024\003ytopkg log commit
-\n
-git add sr\tjb\tbi\tjb\tte\tjb\t*.opam
-\n
-git commit -am \"Added jbuild stuff\"\027[D\027[D\027[D\027[D\027[D\027[D\027[Der
-\n
-topkg tag
-\n
-topk\tdistrib
-\n
-\004
+\024\003y
+topkg 
