@@ -114,7 +114,7 @@ emacs bin/jbuild
 \n\t(pack\tage math-bin)\001\027OB\027OB\027OB
 \n
 \n
-(rule\n\t(with-stdout-to math-fact.1\n\t(run ./cli.exe fact --help=groff)))\n\n
+(rule\n\t(with-stdout-to math.1\n\t(run math --help=groff)))\n\n
 (install\n
 \t((section man)\n
 \t(package math-bin)\n
