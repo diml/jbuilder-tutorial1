@@ -32,7 +32,7 @@ Math.fact 5;;
 \n
 \004
 cat math.mli\n
-rm -f mat\t*
+rm -f mat\t*\n
 ls\n
 \n
 \027[A\027[A\027[A
