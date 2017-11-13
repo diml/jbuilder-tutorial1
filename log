@@ -9,8 +9,6 @@ jbuilder installed-libraries
 touch jbuild-workspace
 \n
 cd src\n
-ls\n
-cat math.mli\n
 jbuilder build\n
 touch jbuild-workspace\n
 jbuilder build\n
@@ -33,6 +31,7 @@ jbuilder utop
 Math.fact 5;;
 \n
 \004
+cat math.mli\n
 rm -f mat\t*
 \n
 \027[A\027[A
