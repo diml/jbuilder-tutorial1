@@ -1,0 +1,146 @@
+Hi, my name is Jeremie and I'm the original author of jbuilder, a
+build system for OCaml and Reason. In this video, I'm going to show
+how to get started with jbuilder. In the first part I'm going to walk
+you step by step into specifying a project so that it can be built and
+tested with jbuilder, and in the second part I will show how to
+package it so that it can be distributed and installed by users.
+
+I'm going to use is a toy project, which is composed of a small math
+library, some tests and a command line tool exposing the functions of
+the library to the shell.
+
+The first thing to do when starting to use jbuilder is to delimit what
+we'll call the workspace. Like with any build system, the file system
+is split into two parts: one parts that contains source files that we
+want to build, and the rest of the file system, which we take as read
+only and typically contains pre-built binaries, such as compilers and
+pre-built libraries, typically installed by a package manager.
+
+With jbuilder, we'll call the first part the "workspace" and the
+second part the "installed world". The way to delimit them is to
+create a jbuild-workspace file, which will define the root of the
+workspace. Such a file is actually a configuration file and when it is
+empty the default configuration is used, which is what we want in this
+video.
+
+For instance, if I go in a sub-directory and type "jbuilder build", it
+prints "Entering directory" following by the root of the
+workspace. Note that it only prints it when the root is not the
+current directory.
+
+You can nest workspaces, and when several choices are possible,
+jbuilder will always choose the biggest workspace. For instance, if I
+create a jbuild-workspace file in my sub-directory, jbuilder will pick
+up the same root. The reaon for this is that it is very common to
+create big workspaces containing several projects. Typically, when
+working on several projects that depend on each others, it is common
+to put them all in the same workspace so that changes to one project
+are immediatly picked up by the others.
+
+Now let's remove this jbuild-workspace file and look at how to specify
+our project. Jbuilder reads metadata from "jbuild" files, in fact
+that's where the name jbuilder comes from, the "j" coming from jenga,
+which is another build system that inspired jbuilder.
+
+These jbuild files are written in S-expression syntax. The
+S-expression syntax is very simple: everything is either an atom or a
+list. Atoms are simply strings and when they are simple they can just be
+written as it. For instance "hello" is an atom. When they contains
+spaces or special characters, they must be enclosed in
+double-quotes. For instance "Hello, world!" is another atom.
+
+Lists are written by writing the elements separated by spaces between
+parentheses. For instance, this is the list "a b c". Lists can be
+nested. Essentially S-expressions represent arbitrary data trees.
+Lastly, you can comment a line with a semilicolon.
+
+Now back to jbuild files. They are composed of stanzas, each stanza
+being a list that start with a keyword. Typically, all jbuilder files
+will start a "jbuild_version" stanza, which indicate which version of
+the specification we are using. If we ever introduce breaking changes,
+this number will increase. This stanza might change when we add
+support for plugins in jbuilder, as we might want to specify the
+versions of the plugins we are using.
+
+We want to say that this directory contains a library, and we do that
+with a "library" stanza which contains a list of fields. Typically we
+must have a "name" field. The name we write here is the name that we
+will use in source code that use this library, so it has to be a valid
+OCaml module name. It doesn't have to start with a capital letter,
+however it cannot contain special characters such as dashes or dots.
+
+Then we are going to add a one liner description with a "synopsis"
+field. It is not mandatory, but it is good practice to have one. In
+particular it is used when we list the libraries that are part of the
+installed world.
+
+Now that we did that, we can ask jbuilder to build this
+library. Simply building it is not very interesting, one thing that we
+do often in OCaml is try the code in the interactive toplevel. This is
+easy to do with jbuilder, all you have to do type "jbuilder utop" and
+we'll get a toplevel session where the libraries defined in the
+current directory are ready to use. The command is called "utop" as it
+uses the "utop" package, which is an improved toplevel for OCaml. So
+you will need to install it first, typically with opam.
+
+So let's try. As you can see I can call the "Math.fact" function and
+get the result.
+
+Before we move on to the rest of the project, I'd like to show you one
+detail about libraries. For this library we have a module "math",
+which jbuilder will use as the interface of the library but you don't
+need to have one. If we don't have it, jbuilder will automatically
+create one composed of all the modules of the library.
+
+For instance if I delete the files for the Math module and run utop
+again, I now have a Math.Fact module but no longer a Math.fact
+function.
+
+Let's restore the files and move on the next part: the command line
+tool. As before we are going to write a jbuild file in the bin
+directory. It starts again with a "jbuild_version" stanza and this
+time we have an "executable" stanza. We again have a "name" field,
+which points to the module that contains the entry point of our
+program. If we had several executables, we could use an "executables"
+stanza which would have a "names" field. Note that we only need to
+list the modules that contain the entry points, we can have other
+modules in the same directory and use them but we don't need to list
+them.
+
+Then, because we are using librarires in this executable, we need to
+add a "libraries" field. It contains "math", which is the library we
+just defined as well a "cmdliner", which is a library used to create
+comand line tools. This library is not part of the workspace, so
+jbuilder will look for it in the installed world. However, if we
+unpacked the sources of cmdliner in the workspace, jbuilder would
+immediately pick it up.
+
+Now we can ask jbuilder to build this executable with "jbuilder build
+bin/cli.exe". Jbuilder puts artifacts in a separate build directory,
+so no files where created in the bin directory and we can use the
+command "jbuilder exec" to run our freshly compiled binary. At the
+time of recording this video, this feature is not yet released. I'm
+using a developpment version of jbuilder.
+
+Now let's look at the last part, the tests. They are written as an
+executable that does some assertions. We need two things: tell
+jbuilder about this executable and tell jbuilder that we want to run
+it as part of running the tests.
+
+The first part is the same as before. For the second, we are going to
+add the action of running the binary to the "runtest" alias. In
+jbuilder aliases are names that refer to sets of files and actions to
+run. We can extend an alias with an "alias" stanza. We need to give
+the name of the alias, here "runtest" and the action to run.
+
+For the action, we are using a small DSL. We don't use an external
+shell as typically done in other build systems. The reason is that
+such shells are usually not fully portable, in particular under
+Windows. On the other hand, this DSL is implemented natively on all
+supported platofrms.
+
+Note that if my tests was reading files, I would need to specify them
+as dependencies with a "deps" field.
+
+To run the tests, we need to ask jbuilder to build the runtest
+alias. To do that we have to write "runtest" prefixed by an "at".

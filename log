@@ -56,8 +56,7 @@ jbuilder build bin/cli.exe
 \n
 ls bin
 \n
-jbuilder exec bin/cli.exe fact 5
-\n
+jbuilder exec bin/cli.exe fact 5\n
 cat te\tte\t
 \n
 emacs te\tjbuild
