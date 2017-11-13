@@ -1,0 +1,280 @@
+/usr/local/bin/bash
+cd ~; rm -rf demo; mkdir demo; cd demo; alias emacs='emacs -nw'; clear
+\n
+git clone ~/code\tjb\t-t\t
+\n
+cd jb\t
+\n
+ls
+\n
+ls sr\t
+\n
+ls te\t
+\n
+ls bi\t
+\n
+touch jbuild-workspace
+\n
+emacs sr\tjbuild
+\n
+hello
+\n
+
+\n
+\"Hello, world!\"
+\n
+
+\n
+(a b c)
+\n
+
+\n
+(a b (c d))
+\n
+
+\n
+\027OA\027OA\027OA\027OA\027OA\027OA\027OA\027OA\027OA\027OA\027OA\027OA\027OA\027OA\000\027OB\027OB\027OB\027OB\027OB\027OB\027OB\027OB\027OB\027OB\027OB\027OB\027OB\023
+(jbuild_version 1)
+\n
+
+\n
+(library
+\n
+\t((name math)
+\n
+\t(synopsis \"Math utilities\")))
+\n
+\024\003y
+cd sr\t
+\n
+jbuilder utop
+\n
+Math.fact 5;;
+\n
+Math.gcd 10 25;;
+\n
+\004
+rm mat\t*
+\n
+y\n
+y\n
+\027[A\027[A
+\n
+Math.Fa\t.fa\t 5;;
+\n
+Math.fact;;
+\n
+\004
+git checkout math.ml math.mli
+\n
+cd ..
+\n
+emacs bin/jbuild
+\n
+(jbuild_version 1)
+\n
+
+\n
+(executable
+\n
+((\tname cli)
+\n
+\t(libraries (math cmdliner))))
+\n
+\024\003y
+jbuilder build bin/cli.exe
+\n
+ls bin
+\n
+jbuilder exec bin/cli.exe fact 5
+\n
+\027[A\127\127\127\127\127\127\127 gcd 10 25
+\n
+cat te\tte\t
+\n
+emacs te\tjbuild
+\n
+(jbuild_version 1)
+\n
+
+\n
+(executable
+\n
+((name test)\t
+\n
+\t(libraries (math))))
+\n
+
+\n
+(alias
+\n
+\t((name runtest)
+\n
+(action\t (run ./test.exe))))
+\n
+\024\003y
+jbuilder build @runtest
+\n
+jbuilder clean
+\n
+jbuilder runtest
+\n
+emacs test/test.ml
+\n
+\005\027OD\1270
+\024\003y
+\027[A\027[A
+\n
+git checkout test/test.ml
+\n
+\027[A\027[A
+\n
+emacs math.opam
+\n
+opam-version: \"1.2\"
+\n
+maintainer: \"jeremie@dimino.org\"
+\n
+authors: [\"J\195\169r\195\169mie Dimino <jeremie@dimino.org>\"]
+\n
+license: \"BSD3\"
+\n
+homepage: \"https://github.com/diml/jbuilder-tutorial1\"
+\n
+bug-reports: \"https://github.com/diml/jbuilder-tutorial1/issues\"
+\n
+dev-repo: \"https://github.com/diml/jbuilder-tutorial1.git\"
+\n
+\024\003y
+\027[A\027[D\027[D\027[D\027[D\027[D-bin
+\n
+opam-version: \"1.2\"
+\n
+maintainer: \"jeremie@dimino.org\"
+\n
+authors: [\"J\195\169r\195\169mie Dimino <jeremie@dimino.org>\"]
+\n
+license: \"BSD3\"
+\n
+homepage: \"https://github.com/diml/jbuilder-tutorial1\"
+\n
+bug-reports: \"https://github.com/diml/jbuilder-tutorial1/issues\"
+\n
+dev-repo: \"https://github.com/diml/jbuilder-tutorial1.git\"
+\n
+\024\003y
+emacs sr\tjb\t
+\n
+\027OB\027OB\027OB\027OB\027OB\027OB\027OA\027OA\005
+\n
+  (public_name math)
+\024\003y
+emacs bin/jbuild
+\n
+\027OB\027OB\027OB\005
+\n
+\t(public_name math)
+\n
+\t(pack\tage math-bin)\001\027OB\027OB\027OB
+\n
+(rule
+\n
+\t((targets (math.1))
+\n
+\t(deps (cli.exe))
+\n
+(act\tion (with-stdout-to ${@}\n\t(run ./${<} --help=groff)))))
+\n
+
+\n
+(rule
+\n
+\t(with-stdout-to math-fact.1
+\n
+\t(run ./cli.exe fact --help=groff)))
+\n\n
+(rule\n\t(with-stdout-to math-gcd.1\n\t(run ./cli.exe gcd --help=groff)))\n\n
+(install
+\n
+\t((section man)
+\n
+\t(package math-bin)
+\n
+\t(files (math.1 math-fact.1 math-gcd.1))))
+\n
+\024\003y
+emacs te\tjbuild
+\n
+\027OB\027OB\027OB\027OB\027OB\027OB\027OB\005
+\n
+\t(package math)
+\024\003y
+jbuilder build math.install
+\n
+cat mat\t.in\t
+\n
+jbuilder build math-bin.install
+\n
+cat mat\t-b\ti\t
+\n
+jbuilder build @install
+\n
+jbuilder build
+\n
+jbuilder clean
+\n
+jbuilder build
+\n
+jbuilder install
+\n
+math fact 5
+\n
+emacs math.opam
+\n
+\027OB\027OB\027OB\027OB\027OB\027OB\027OB\027OB\027OBbuild: [[\"jbuilder\" \"build\" \"-p\" name \"-j\" jobs]]
+\n
+\001\011\000\027OA\027w\027OB\025\027OA\027OC\027OC\027OC\027OC\027OC-test\027OC\027OC\027OC\027OC\027OC\027OC\027OC\027OC\027OC\027OC\027OC\027OC\027OC\027OC\027OC\027OC\027OC\027OC\027OC\027OC\027OC\127\127\127\127\127runtest\001\024\003y\027[A\027[D\027[D\027[D\027[D\027[D-bin
+\n
+\027OB\027OB\027OB\027OB\027OB\027OB\027OB\027OB\027[200~build: [[\"jbuilder\" \"build\" \"-p\" name \"-j\" jobs]]
+\n
+build-test: [[\"jbuilder\" \"runtest\" \"-p\" name \"-j\" jobs]]\027[201~
+\n
+\001\011depends: [
+\n
+\"cmdliner\"
+\n
+\"math\"
+\n
+]\t
+\n
+\001\011\024\003ymkdir pkg
+\n
+emacs pkg/pkg.ml
+\n
+#use \"topfind\"
+\n
+#require \"topkg-jbuilder.auto\"
+\n
+\024\003ytopkg log edit
+\n
+1.\127\1270.1 \127
+\n
+---
+\n
+
+\n
+- Initial import
+\n
+git add CH\t
+\n
+\024\003ytopkg log commit
+\n
+git add sr\tjb\tbi\tjb\tte\tjb\t*.opam
+\n
+git commit -am \"Added jbuild stuff\"\027[D\027[D\027[D\027[D\027[D\027[D\027[Der
+\n
+topkg tag
+\n
+topk\tdistrib
+\n
+\004
