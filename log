@@ -32,6 +32,7 @@ Math.fact 5;;
 \n
 \004
 cat math.mli\n
+ls\n
 rm -f mat\t*
 \n
 \027[A\027[A
@@ -92,21 +93,9 @@ git checkout test/test.ml
 \n
 emacs math.opam
 \n
+n
 ##fast
-opam-version: \"1.2\"
-\n
-maintainer: \"jeremie@dimino.org\"
-\n
-authors: [\"J\195\169r\195\169mie Dimino <jeremie@dimino.org>\"]
-\n
-license: \"BSD3\"
-\n
-homepage: \"https://github.com/diml/jbuilder-tutorial1\"
-\n
-bug-reports: \"https://github.com/diml/jbuilder-tutorial1/issues\"
-\n
-dev-repo: \"https://github.com/diml/jbuilder-tutorial1.git\"
-\n
+opam-version: \"1.2\"\nmaintainer: \"jeremie@dimino.org\"\nauthors: [\"J\195\169r\195\169mie Dimino <jeremie@dimino.org>\"]\nlicense: \"BSD3\"\nhomepage: \"https://github.com/diml/jbuilder-tutorial1\"\nbug-reports: \"https://github.com/diml/jbuilder-tutorial1/issues\"\ndev-repo: \"https://github.com/diml/jbuilder-tutorial1.git\"\n
 ##slow
 \024\003y
 cp math.opam math-bin.opam
@@ -124,7 +113,6 @@ emacs bin/jbuild
 \t(public_name math)
 \n\t(pack\tage math-bin)\001\027OB\027OB\027OB
 \n
-xxxxxxxxxxxxxxxxxxx
 \n
 (rule\n\t(with-stdout-to math-fact.1\n\t(run ./cli.exe fact --help=groff)))\n\n
 (install\n
