@@ -1,17 +1,11 @@
 /usr/local/bin/bash
-cd ~; rm -rf demo; mkdir demo; cd demo; alias emacs='emacs -nw'; clear
-\n
-git clone ~/code\tjb\t-t\t
-\n
-cd jb\t
+##fast
+cd ~; rm -rf demo; mkdir demo; cd demo; alias emacs='emacs -nw'; git clone ~/code\tjb\t-t\t; cd jbuilder-tutorial1
+##slow
 \n
 ls
 \n
-ls sr\t
-\n
-ls te\t
-\n
-ls bi\t
+ls sr\t te\t bi\t
 \n
 touch jbuild-workspace
 \n
