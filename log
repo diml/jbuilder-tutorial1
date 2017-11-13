@@ -4,56 +4,37 @@ cd ~; rm -rf demo; mkdir demo; cd demo; alias emacs='emacs -nw'; git clone ~/cod
 ##slow
 ls\n
 ls sr\t te\t bi\t\n
+jbuilder installed-libraries
+\n
 touch jbuild-workspace
 \n
 cd src\n
+ls\n
+cat math.mli\n
 jbuilder build\n
 touch jbuild-workspace\n
 jbuilder build\n
 rm -f jbuild-workspace\n
 emacs jbuild
-\nn
+\n
 hello
-\n
-
-\n
-\"Hello, world!\"
-\n
-
-\n
-(a b c)
-\n
-
-\n
-(a b (c d))
-\n
-
-\n
-\027OA\027OA\027OA\027OA\027OA\027OA\027OA\027OA\027OA\027OA\027OA\027OA\027OA\027OA\000\027OB\027OB\027OB\027OB\027OB\027OB\027OB\027OB\027OB\027OB\027OB\027OB\027OB\023
+\n\n\"Hello, world!\"
+\n\n(a b c)
+\n\n(a b (c d))
+\n\n\027OA\027OA\027OA\027OA\027OA\027OA\027OA\027OA\027OA\027OA\027OA\027OA\027OA\027OA\000\027OB\027OB\027OB\027OB\027OB\027OB\027OB\027OB\027OB\027OB\027OB\027OB\027OB\023
 (jbuild_version 1)
-\n
-
-\n
-(library
-\n
-\t((name math)
-\n
-\t(synopsis \"Math utilities\")))
+\n\n(library
+\n\t((name math)
+\n\t(synopsis \"Math utilities\")))
 \n
 \024\003y
-cd sr\t
-\n
 jbuilder utop
 \n
 Math.fact 5;;
 \n
-Math.gcd 10 25;;
-\n
 \004
-rm mat\t*
+rm -f mat\t*
 \n
-y\n
-y\n
 \027[A\027[A
 \n
 Math.Fa\t.fa\t 5;;
@@ -68,14 +49,9 @@ cd ..
 emacs bin/jbuild
 \n
 (jbuild_version 1)
-\n
-
-\n
-(executable
-\n
-((\tname cli)
-\n
-\t(libraries (math cmdliner))))
+\n\n(executable
+\n((\tname cli)
+\n\t(libraries (math cmdliner))))
 \n
 \024\003y
 jbuilder build bin/cli.exe
@@ -91,22 +67,12 @@ cat te\tte\t
 emacs te\tjbuild
 \n
 (jbuild_version 1)
-\n
-
-\n
-(executable
-\n
-((name test)\t
-\n
-\t(libraries (math))))
-\n
+\n\n(executable\n((name test)\t\n\t(libraries (math))))\n
 
 \n
 (alias
-\n
-\t((name runtest)
-\n
-(action\t (run ./test.exe))))
+\n\t((name runtest)
+\n(action\t (run ./test.exe))))
 \n
 \024\003y
 jbuilder build @runtest
