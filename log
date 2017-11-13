@@ -59,8 +59,6 @@ ls bin
 \n
 jbuilder exec bin/cli.exe fact 5
 \n
-\027[A\127\127\127\127\127\127\127 gcd 10 25
-\n
 cat te\tte\t
 \n
 emacs te\tjbuild
