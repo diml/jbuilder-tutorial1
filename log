@@ -155,7 +155,7 @@ emacs math.opam
 \001\024\003y
 \027[A\027[D\027[D\027[D\027[D\027[D-bin
 \n
-\027OB\027OB\027OB\027OB\027OB\027OB\027OB\027OB\027[200~build: [[\"jbuilder\" \"build\" \"-p\" name \"-j\" jobs]]
+\027OB\027OB\027OB\027OB\027OB\027OB\027OB\027OBbuild: [[\"jbuilder\" \"build\" \"-p\" name \"-j\" jobs]]
 \n
 build-test: [[\"jbuilder\" \"runtest\" \"-p\" name \"-j\" jobs]]
 \n
