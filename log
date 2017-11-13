@@ -4,8 +4,6 @@ cd ~; rm -rf demo; mkdir demo; cd demo; alias emacs='emacs -nw'; git clone ~/cod
 ##slow
 ls\n
 ls sr\t te\t bi\t\n
-jbuilder installed-libraries
-\n
 touch jbuild-workspace
 \n
 cd src\n
