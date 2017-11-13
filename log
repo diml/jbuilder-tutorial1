@@ -147,6 +147,9 @@ jbuilder install
 \n
 math fact 5
 \n
+man math
+\n
+q
 emacs math.opam
 \n
 \027OB\027OB\027OB\027OB\027OB\027OB\027OB\027OB\027OBbuild: [[\"jbuilder\" \"build\" \"-p\" name \"-j\" jobs]]
