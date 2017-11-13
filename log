@@ -180,4 +180,4 @@ emacs pkg/pkg.ml
 #require \"topkg-jbuilder.auto\"
 \n
 \024\003y
-topkg 
+topkg help release
