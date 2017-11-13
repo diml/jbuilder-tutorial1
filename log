@@ -3,14 +3,17 @@
 cd ~; rm -rf demo; mkdir demo; cd demo; alias emacs='emacs -nw'; git clone ~/code/\tjb\t-t\t; cd jbuilder-tutorial1; git checkout master; clear
 ##slow
 \n
-ls
-\n
-ls sr\t te\t bi\t
-\n
+ls\n
+ls sr\t te\t bi\t\n
 touch jbuild-workspace
 \n
-emacs sr\tjbuild
-\n
+cd src\n
+jbuilder build\n
+touch jbuild-workspace\n
+jbuilder build\n
+rm -f jbuild-workspace\n
+emacs jbuild
+\nn
 hello
 \n
 
