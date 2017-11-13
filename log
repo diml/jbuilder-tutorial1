@@ -1,6 +1,6 @@
 /usr/local/bin/bash
 ##fast
-cd ~; rm -rf demo; mkdir demo; cd demo; alias emacs='emacs -nw'; git clone ~/code\tjb\t-t\t; cd jbuilder-tutorial1; git checkout master; clear
+cd ~; rm -rf demo; mkdir demo; cd demo; alias emacs='emacs -nw'; git clone ~/code/\tjb\t-t\t; cd jbuilder-tutorial1; git checkout master; clear
 ##slow
 \n
 ls
