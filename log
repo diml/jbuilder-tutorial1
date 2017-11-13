@@ -34,7 +34,6 @@ Math.fact 5;;
 cat math.mli\n
 rm -f mat\t*\n
 ls\n
-\n
 jbuilder utop
 \n
 Math.Fa\t.fa\t 5;;
