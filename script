@@ -1,13 +1,16 @@
 Hi, my name is Jeremie and I'm the original author of jbuilder, a
 build system for OCaml and Reason. In this video, I'm going to show
-how to get started with jbuilder. In the first part I'm going to walk
-you step by step into specifying a project so that it can be built and
-tested with jbuilder, and in the second part I will show how to
-package it so that it can be distributed and installed by users.
+how to get started with jbuilder. In the first part I'm going to show
+how to setup jbuilder, in the scond part I'm going to walk you step by
+step into specifying a project so that it can be built and tested with
+jbuilder, and in the third part I will show how to package it so that
+it can be distributed and installed by users.
 
 I'm going to use is a toy project, which is composed of a small math
 library, some tests and a command line tool exposing the functions of
 the library to the shell.
+
+Let's look at the first part, the setup.
 
 The first thing to do when starting to use jbuilder is to delimit what
 we'll call the workspace. Like with any build system, the file system
@@ -37,10 +40,12 @@ working on several projects that depend on each others, it is common
 to put them all in the same workspace so that changes to one project
 are immediatly picked up by the others.
 
-Now let's remove this jbuild-workspace file and look at how to specify
-our project. Jbuilder reads metadata from "jbuild" files, in fact
-that's where the name jbuilder comes from, the "j" coming from jenga,
-which is another build system that inspired jbuilder.
+That's all we need for the setup. Now let's move on to the second part
+and see how we can describe our project to jbuilder.
+
+Jbuilder reads metadata from "jbuild" files, in fact that's where the
+name jbuilder comes from, the "j" coming from jenga, which is another
+build system that inspired jbuilder.
 
 These jbuild files are written in S-expression syntax. The
 S-expression syntax is very simple: everything is either an atom or a
@@ -153,12 +158,13 @@ runtest".
 To show that the test is indeed run, I'm going to make it fail. If I
 do "jbuilder runtest" again, we can see that the test is failing.
 
+That's all for the second part of this video. We have seen to describe
+our project in terms of libraries, executables and tests. Now we are
+going to see how to package our project with jbuilder.
 
-That's all for the first part of this video. Now we are going to see
-how to package our project with jbuilder. A package is a set of
-libraries, executables and other files that will be installed together
-on the user machine, typically by using a package manager such as
-opam.
+What we mean by a package is a set of libraries, executables and other
+files that will be installed together on the user machine, typically
+by using a package manager such as opam.
 
 We can have multiple packages in the same project. In particular in
 this example we are going to have two packages: one called "math" for
@@ -331,5 +337,5 @@ be able to recognize a jbuilder project.
 That's all for this video. I hope that it will help you understand
 better how jbuilder works and how you can use it your projects. There
 are many features of jbuilder I haven't talked about, you can find
-more in the online manual and if you have questions, don't hesitate to
-ask, either on the github project or on discuss.ocaml.org.
+more about them in the online manual and if you have questions, don't
+hesitate to ask, either on the github project or on discuss.ocaml.org.
