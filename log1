@@ -10,6 +10,9 @@ jbuilder build\n
 touch jbuild-workspace\n
 jbuilder build\n
 rm -f jbuild-workspace\n
+ls -R\n
+cat math.mli\n
+cat math.ml\n
 emacs jbuild
 \n
 hello
@@ -29,7 +32,6 @@ jbuilder utop
 Math.fact 5;;
 \n
 \004
-cat math.mli\n
 rm -f mat\t*\n
 ls\n
 jbuilder utop
