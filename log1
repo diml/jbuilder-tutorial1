@@ -2,8 +2,7 @@
 ##fast
 cd ~; rm -rf demo; mkdir demo; cd demo; alias emacs='emacs -nw'; git clone ~/code/\tjb\t-t\t; cd jbuilder-tutorial1; git checkout master; clear\n
 ##slow
-ls\n
-ls sr\t te\t bi\t\n
+ls -R\n
 touch jbuild-workspace
 \n
 cd src\n
@@ -57,6 +56,20 @@ jbuilder build bin/cli.exe
 ls bin
 \n
 jbuilder exec bin/cli.exe fact 5\n
+rm src/primes100.ml\n
+jbuilder build bin/cli.exe
+\n
+emacs src/gen/jbuild
+\n
+(jbuild_version 1)\n\n(executable ((name gen_primes100)))\n
+\024\003y
+emacs src/jbuild
+\n
+\203\152
+(rule\n\t(with-stdout-to primes100.ml\n\t(run gen/gen_primes100.exe)))\n
+\024\003y
+jbuilder build bin/cli.exe
+\n
 cat te\tte\t
 \n
 emacs te\tjbuild
