@@ -1,0 +1,81 @@
+/usr/local/bin/bash
+##fast
+cd ~; rm -rf demo; mkdir demo; cd demo; alias emacs='emacs -nw'; git clone ~/code/\tjb\t-t\t; cd jbuilder-tutorial1; git checkout master; clear\n
+##slow
+ls\n
+ls sr\t te\t bi\t\n
+touch jbuild-workspace
+\n
+cd src\n
+jbuilder build\n
+touch jbuild-workspace\n
+jbuilder build\n
+rm -f jbuild-workspace\n
+emacs jbuild
+\n
+hello
+\n\n\"Hello, world!\"
+\n\n(a b c)
+\n\n(a b (c d))
+\001;
+\001\027OA\027OA\027OA\027OA\027OA\027OA\027OA\027OA\027OA\027OA\027OA\027OA\027OA\000\027OB\027OB\027OB\027OB\027OB\027OB\027OB\027OB\027OB\027OB\027OB\027OB\027OB\023
+(jbuild_version 1)
+\n\n(library
+\n\t((name math)
+\n\t(synopsis \"Math utilities\")))
+\n
+\024\003y
+jbuilder utop
+\n
+Math.fact 5;;
+\n
+\004
+cat math.mli\n
+rm -f mat\t*\n
+ls\n
+jbuilder utop
+\n
+Math.Fa\t.fa\t 5;;
+\n
+Math.fact;;
+\n
+\004
+git checkout math.ml math.mli
+\n
+cd ..
+\n
+emacs bin/jbuild
+\n
+(jbuild_version 1)
+\n\n(executable
+\n((\tname cli)
+\n\t(libraries (math cmdliner))))
+\n
+\024\003y
+jbuilder build bin/cli.exe
+\n
+ls bin
+\n
+jbuilder exec bin/cli.exe fact 5\n
+cat te\tte\t
+\n
+emacs te\tjbuild
+\n
+(jbuild_version 1)\n\n(executable\n((name test)\t\n\t(libraries (math))))\n
+
+\n
+(alias
+\n\t((name runtest)
+\n(action\t (run ./test.exe))))
+\n
+\024\003y
+jbuilder build @runtest
+\n
+jbuilder runtest
+\n
+emacs test/test.ml
+\n
+\005\027OD\1270
+\024\003y
+\027[A\027[A
+\n
