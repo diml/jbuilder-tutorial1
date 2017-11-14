@@ -130,8 +130,9 @@ it as part of running the tests.
 The first part is the same as before. For the second, we are going to
 add the action of running the binary to the "runtest" alias. In
 jbuilder aliases are names that refer to sets of files and actions to
-run. We can extend an alias with an "alias" stanza. We need to give
-the name of the alias, here "runtest" and the action to run.
+run. We can extend an alias in a given directory with an "alias"
+stanza. We need to give the name of the alias, here "runtest" and the
+action to run.
 
 For the action, we are using a small DSL. We don't use an external
 shell as typically done in other build systems. The reason is that
@@ -143,4 +144,192 @@ Note that if my tests was reading files, I would need to specify them
 as dependencies with a "deps" field.
 
 To run the tests, we need to ask jbuilder to build the runtest
-alias. To do that we have to write "runtest" prefixed by an "at".
+alias. To do that we have to write "runtest" prefixed by an "at". This
+instructs jbuilder to build the runtest alias recursively in all
+directories starting from the current one. Since this is a very common
+operation, there is a shorthand for it, we can simply write "jbuilder
+runtest".
+
+To show that the test is indeed run, I'm going to make it fail. If I
+do "jbuilder runtest" again, we can see that the test is failing.
+
+
+That's all for the first part of this video. Now we are going to see
+how to package our project with jbuilder. A package is a set of
+libraries, executables and other files that will be installed together
+on the user machine, typically by using a package manager such as
+opam.
+
+We can have multiple packages in the same project. In particular in
+this example we are going to have two packages: one called "math" for
+the library and one called "math-bin" for the command line tool
+together with a manual page. The reason we typically want to have
+several packages is to have more fine grained dependencies, since
+package managers can only install whole packages at once. If we were
+defining a single package, whenever someone would want to use the
+"math" library, they would end up having to install the "cmdliner"
+package as well, even though they might not the command line tool.
+
+The first step is to tell jbuilder about the two packages we want to
+define. This is not done in jbuild files. The reason is that these
+packages will be distributed through the opam package manager, and to
+do so we will have to write package.opam files. So to avoid
+duplicating the information, jbuilder simply acknowledges the presence
+of these package.opam files.
+
+So we are going to create these two files. I'm starting by writing the
+information that is not relevant to the build of these packages such
+as the homepage or the maintainer. In particular, for now these two
+files are identical. There is a bit of duplication here, the reason
+for that is that when opam started projects were typically composed of
+a single package and that was because it was complicated to setup the
+build of multi-package projects. However, it is really simple to do so
+with jbuilder.
+
+Now that we have added these opam files, we can add components to
+these two packages. Wwe can only declare components in a certain scope
+and not in the whole workspace. This scope is the sub-tree that starts
+where these two opam files live, excluding any other sub-scope. This
+is to ensure that when we have several projects in the same workspace
+they don't overlap.
+
+For instance, let's add the library to the "math" package. For that we
+simply have to add a public name to the library. This public name is
+the name that we'll have to write in jbuild files of other projects
+when we want to use the "math" library. It must start with the package
+name, so "math", and can be followed by a dot and anything else we
+want. This allows to put several libraries in the same package. The
+name and public name are often the same, however they might be
+different, typically when the package is not a valid module name, for
+instance if it contains a dash.
+
+Libraries that don't have a public name are private, and can only be
+used in the scope where they are defined. In particular it is ok to
+have several private libraries with the same name inside the same
+workspace, as long as they are in different scopes. This often happens
+when we have several projects in the same workspace. Public library
+names on the contrary must be unique.
+
+Now let's look at the "math-bin" package. Same as for the library, we
+simply a public name to the executable. This name is the name under
+which the binary will be installed in the bin directory and can be
+used from the shell. It can be anything and doesn't have to start with
+the package name.
+
+Since we have two packages in the current scope, we must tell which
+package this binary is part of by adding a "package" field. If we had
+only one, we wouldn't need to.
+
+Another thing we want to add in the "math-bin" package is a manual
+page so that the user can do "man math". The manual page can be
+generated directly from the executable, this is feature of
+cmdliner. However, jbuilder doesn't know about cmdliner, so creating
+this manual page is not a builtin. We have to use a custom rule to do
+it.
+
+Custom rules are specified with a "rule" stanza. Here we simply write
+the action using the same DSL as for the alias stanza and the
+"with-stdout-to" form allows to dump the output of a command to a
+file. Note that we say "run math" rather than "run
+./cli.exe". Normally, jbuilder would resolve this "math" name in the
+same way as a shell: it would look it up in the PATH. However, since
+it knows that we are installing a math binary, it will resolve to the
+the local binary rather than looking it up the PATH.
+
+Here the dependencies and targets of the rule are obvious from the
+action. If they were not, we would have to specify them
+explicitely. In fact, this form is the short version of the "rule"
+stanza. It normally has "targets", "deps" and "action" fields.
+
+Now that we know how to create this file, we need to tell jbuilder to
+install it by writing an "install" stanza. It starts with a section,
+which for instance can be "bin", "lib", "doc" or other things. Here we
+want the "man" section which is for installing manual pages. We need
+to disambiguate the package as well so we write "package math-bin"
+again. Lastly we specify the list of files to install.
+
+For tests, there is nothing to install. However, often package
+managers allow to specify how to run the tests for a package. We don't
+want the tests to be run for both packages. Since they are only
+testing the library, we specify that they are part of the "math"
+package.
+
+Now that we have done all that, we can ask jbuilder to build the
+package.install files. This causes jbuilder to build everything that
+needs to be installed and generate a package.install file containing
+the list of files to install.
+
+For instance if we ask jbuilder to build math.install, it will build a
+few more things that needs to be installed. Typically here it built a
+few more files that we didn't needed so far but might be needed by
+users of the library once it is installed. And math.install contains
+the list of files to install for the "math" package. We can do the
+same for the "math-bin" package, and we can see our binary, our manual
+page as well as some other files that jbuilder always installs because
+they are used by other tools.
+
+Since building the package.install files is very common, there is an
+alias that refers to all these files. It is the install alias. In
+partucilar, since "jbuilder build @install" is the most commonly run
+command, "@install" is the default target if none are given.
+
+After building the packages, we can ask jbuilder to install them with
+"jbuilder install". Now we can use the "math" tool directly or consult
+the manual page.
+
+At the moment, opam doesn't know about jbuilder. So before we
+distribute our packages, we have to write in the opam files how to
+build our packages with jbuilder. The line to write is the same for
+all packages using jbuilder, so you can simply copy paste it
+everywhere. It is "jbuilder build -p name -j jobs". So that see that
+"name" and "jobs" are not between double quotes, this is because they
+are variables filled by opam. "name" will be replaced by the package
+name, so "math" here and "jobs" by the number of jobs allocated by
+opam to build the package.
+
+The "-p" option is very important and must always be used in opam
+files. The long for of this option is "--for-release-of-package". It
+has two effects: first, it sets jbuilder into a more deterministic
+mode. For instance, it disable the lookup for a jbuild-workspace file
+and assume that the root of the workspace is wherever jbuilder is
+started. This is to ensure that when a user install our package with
+opam, jbuilder won't accidently pick up the wrong jbuild-workspace
+file. If in the future we make jbuilder look at environment variable
+or read global configuration files, we'll make sure that "-p" disable
+this as well.
+
+The second effect of this option is to filter the contents of the
+jbuild files in the workspace: it will ignore any stanza that is part
+of a different package that the current one. For instance, when
+installing the "math-bin" package with opam, we want to use the "math"
+library that was previously installed by opam and not recompile the
+one in src. When given "-p math-bin", jbuilder will basically ignore
+the contents of src/jbuild. So it will think that the workspace
+doesn't contain a "math" library and will always look for it in the
+installed world.
+
+Then we can also write a "build-test" line to tell opam how to build
+and run the tests if the user ask for them. We simply replace "build"
+by "runtest".
+
+We do the exact same thing for the "math-bin" package. The only
+difference is that this package has dependencies so we need to write
+them down.
+
+That's essentially all we have to do for the packaging part. The last
+thing I recommend to do is to write the following pkg/pkg.ml file with
+these two lines. It will allow to use the "topkg" command line tool on
+the project. This tool allows to automate the steps for creating a
+release, uploading it with the release notes and documentation and
+publishing it in the main opam repository. This is really nice when
+you do a lot of releases as doing all this manually is very boring.
+
+Eventually, we shouldn't even have to write this file, as topkg will
+be able to recognize a jbuilder project.
+
+
+That's all for this video. I hope that it will help you understand
+better how jbuilder works and how you can use it your projects. There
+are many features of jbuilder I haven't talked about, you can find
+more in the online manual and if you have questions, don't hesitate to
+ask, either on the github project or on discuss.ocaml.org.

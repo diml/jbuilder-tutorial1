@@ -61,8 +61,7 @@ cat te\tte\t
 \n
 emacs te\tjbuild
 \n
-(jbuild_version 1)
-\n\n(executable\n((name test)\t\n\t(libraries (math))))\n
+(jbuild_version 1)\n\n(executable\n((name test)\t\n\t(libraries (math))))\n
 
 \n
 (alias
@@ -71,8 +70,6 @@ emacs te\tjbuild
 \n
 \024\003y
 jbuilder build @runtest
-\n
-jbuilder clean
 \n
 jbuilder runtest
 \n
@@ -83,8 +80,6 @@ emacs test/test.ml
 \027[A\027[A
 \n
 git checkout test/test.ml
-\n
-\027[A\027[A
 \n
 emacs math.opam
 \n
@@ -107,7 +102,6 @@ emacs bin/jbuild
 \n
 \t(public_name math)
 \n\t(pack\tage math-bin)\001\027OB\027OB\027OB
-\n
 \n
 (rule\n\t(with-stdout-to math.1\n\t(run math --help=groff)))\n\n
 (install\n
@@ -152,11 +146,9 @@ emacs math.opam
 \001\011\000\027OA\027w\027OB\025\027OA\027OC\027OC\027OC\027OC\027OC-test\027OC\027OC\027OC\027OC\027OC\027OC\027OC\027OC\027OC\027OC\027OC\027OC\027OC\027OC\027OC\027OC\027OC\027OC\027OC\027OC\027OC\127\127\127\127\127runtest
 \001\024\003y
 \027[A\027[D\027[D\027[D\027[D\027[D-bin
-\n
-\027OB\027OB\027OB\027OB\027OB\027OB\027OB\027OBbuild: [[\"jbuilder\" \"build\" \"-p\" name \"-j\" jobs]]
-\n
-build-test: [[\"jbuilder\" \"runtest\" \"-p\" name \"-j\" jobs]]
-\n
+##fast
+\n\027OB\027OB\027OB\027OB\027OB\027OB\027OB\027OBbuild: [[\"jbuilder\" \"build\" \"-p\" name \"-j\" jobs]]\nbuild-test: [[\"jbuilder\" \"runtest\" \"-p\" name \"-j\" jobs]]\n
+##slow
 \001\011depends: [
 \n
 \"cmdliner\"
@@ -174,5 +166,4 @@ emacs pkg/pkg.ml
 \n
 #require \"topkg-jbuilder.auto\"
 \n
-\024\003y
-topkg help release
+\024\003ytopkg help release
