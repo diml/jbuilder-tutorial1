@@ -1,15 +1,15 @@
-Hi, my name's Jeremie and I'm the original author of jbuilder, a
-build system for OCaml and Reason. In this video, I'm going to show
-how to get started with jbuilder. I'm going to I'm going to walk you
-step by step into specifying a project so that it can be built and
-tested with jbuilder. Following this video there will be a second one
-showing how to package the project so that it can be distributed to a
-package manager such as opam.
+Hi, my name's Jeremie and I'm am OCaml developer. I'm doing this video
+tutorial to talk about jbuilder, a build system for OCaml and
+Reason. I'm going to walk you step by step into specifying a project
+so that it can be built and tested with jbuilder. One thing that won't
+be covered is how to package the project so that it can be distributed
+through a package manager such as opam. This will be the covered in
+another video.
 
 I'm going to use is a toy project, which is composed of a small math
-library, some tests and a command line tool exposing the functions of
-the library to the shell. This project is written in OCaml, but what
-I'm going to describe would be the same for a Reason project.
+library, some tests and a command line tool. This project is written
+in OCaml, but what I'm going to describe would be the same for a
+Reason project.
 
 Before we look more in detail at the project itself, the first thing
 we need to do is delimit what we call the workspace. Like with any
