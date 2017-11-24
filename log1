@@ -67,7 +67,7 @@ emacs src/gen/jbuild
 \024\003y
 emacs src/jbuild
 \n
-\027OB\027OB\027OB\027OB\027OB\027OB
+\027OB\027OB\027OB\027OB\027OB\027OB\n
 (rule\n\t(with-stdout-to primes100.ml\n\t(run gen/gen_primes100.exe)))\n
 \024\003y
 jbuilder build bin/cli.exe

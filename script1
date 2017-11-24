@@ -1,10 +1,11 @@
-Hi, my name's Jeremie and I'm am OCaml developer. I'm doing this video
+Hi, my name's Jeremie, I'm an OCaml developer and I'm doing this video
 tutorial to talk about jbuilder, a build system for OCaml and
-Reason. I'm going to walk you step by step into specifying a project
-so that it can be built and tested with jbuilder. One thing that won't
-be covered is how to package the project so that it can be distributed
-through a package manager such as opam. This will be the covered in
-another video.
+Reason. More precisely, I'm going to walk you step by step into
+specifying a project so that it can be built and tested with
+jbuilder. In this video I will only cover the basics to develop code
+using jbuilder, but I will not cover the packaging part, which would
+typically allow to distribute a project through a package manager,
+such as opam. This will be covered in another video.
 
 I'm going to use is a toy project, which is composed of a small math
 library, some tests and a command line tool. This project is written
@@ -40,7 +41,7 @@ projects. Typically, when working on several projects that depend on
 each others, it is common to put them all in the same workspace so
 that changes to one project are immediatly picked up by the others.
 
-So far we've seen how delimit the set of files we want to work
+So far we've seen how to delimit the set of files we want to work
 on. That's all the setup we need to start using jbuilder. Now let's
 move on to the next part and see how we can describe our project to
 jbuilder.
